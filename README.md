@@ -1,5 +1,5 @@
 # magic_gamma_telescope_classification
-This is a binary classification project, the input classes are the input data of the telescope and the output data is the gamma (signal) # labeled 1, or hadron (background) # labeled 0
+This is a binary classification project, the input classes are the input data of the telescope and the output data is the gamma (signal) # labeled 1, or hadron (background) # labeled 0.
 This is the download link UCI machine learning repo : https://archive.ics.uci.edu/dataset/159/magic+gamma+telescope
 
 Dataset Information
