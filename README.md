@@ -1,11 +1,114 @@
-# magic_gamma_telescope_classification
-This is a binary classification project, the input classes are the input data of the telescope and the output data is the gamma (signal) # labeled 1, or hadron (background) # labeled 0.
-This is the download link UCI machine learning repo : https://archive.ics.uci.edu/dataset/159/magic+gamma+telescope
+MAGIC Gamma Classification
 
-Dataset Information
-Additional Information
+Binary classification of MAGIC Gamma Telescope events (gamma vs hadron) using multiple models: K-NN, Naive Bayes, Logistic Regression, SVM, and a small TensorFlow MLP. Includes EDA histograms, train/validation/test split, feature scaling, optional oversampling to handle class imbalance, and model evaluation with classification_report.
 
-The data are MC generated (see below) to simulate registration of high energy gamma particles in a ground-based atmospheric Cherenkov gamma telescope using the imaging technique. Cherenkov gamma telescope observes high energy gamma rays, taking advantage of the radiation emitted by charged particles produced inside the electromagnetic showers initiated by the gammas, and developing in the atmosphere. This Cherenkov radiation (of visible to UV wavelengths) leaks through the atmosphere and gets recorded in the detector, allowing reconstruction of the shower parameters. The available information consists of pulses left by the incoming Cherenkov photons on the photomultiplier tubes, arranged in a plane, the camera. Depending on the energy of the primary gamma, a total of few hundreds to some 10000 Cherenkov photons get collected, in patterns (called the shower image), allowing to discriminate statistically those caused by primary gammas (signal) from the images of hadronic showers initiated by cosmic rays in the upper atmosphere (background).
+Dataset
 
-Typically, the image of a shower after some pre-processing is an elongated cluster. Its long axis is oriented towards the camera center if the shower axis is parallel to the telescope's optical axis, i.e. if the telescope axis is directed towards a point source. A principal component analysis is performed in the camera plane, which results in a correlation axis and defines an ellipse. If the depositions were distributed as a bivariate Gaussian, this would be an equidensity ellipse. The characteristic parameters of this ellipse (often called Hillas parameters) are among the image parameters that can be used for discrimination. The energy depositions are typically asymmetric along the major axis, and this asymmetry can also be used in discrimination. There are, in addition, further discriminating characteristics, like the extent of the cluster in the image plane, or the total sum of depositions.
+File: magic04.data (CSV, no header)
 
+Columns:
+
+fLength, fWidth, fSize, fConc, fConc1, fAsym, fM3Long, fM3Trans, fAlpha, fDist, class
+
+
+Target encoding: "g" → 1 (gamma), "h" → 0 (hadron)
+
+Place magic04.data in the project root (same folder as the script/notebook).
+
+Environment & Dependencies
+
+Python 3.10+ recommended
+
+Install dependencies:
+
+pip install numpy pandas matplotlib scikit-learn imbalanced-learn tensorflow
+
+
+Optional (for notebooks):
+
+pip install jupyter
+
+Quick Start
+
+Load & preprocess
+
+Reads magic04.data, assigns column names.
+
+Converts target to binary.
+
+Plots feature histograms per class.
+
+Split
+
+Shuffles the dataset and splits into:
+
+Train: 60%
+
+Validation: 20%
+
+Test: 20%
+
+Scale & (optionally) oversample
+
+Standardizes features with StandardScaler.
+
+Applies RandomOverSampler on the training set (optional flag).
+
+Train models
+
+K-NN (n_neighbors=5)
+
+Gaussian Naive Bayes
+
+Logistic Regression
+
+SVM (RBF)
+
+TensorFlow MLP (grid over hidden units, dropout, learning rate, batch size)
+
+Evaluate
+
+Prints classification_report (precision, recall, f1, support) on the test set.
+
+For the MLP, picks the configuration with lowest validation loss and evaluates it on the test set.
+
+Running
+
+If using a script (e.g., main.py), simply:
+
+python main.py
+
+
+If using a notebook, run cells top-to-bottom.
+
+Output
+
+Per-feature histograms comparing gamma vs hadron distributions.
+
+Text reports for each classical model.
+
+Training curves (loss/accuracy) for each MLP setting.
+
+Final test-set report for the best MLP.
+
+Project Structure (suggested)
+.
+├── magic04.data
+├── README.md
+├── requirements.txt
+└── src/
+    ├── data.py           # load_data(), train_valid_test_split(...)
+    ├── preprocess.py     # fit_scaler(), transform(), oversample_train(...)
+    ├── models.py         # build/train classical models and MLP
+    ├── train.py          # orchestrates workflow
+    └── viz.py            # histogram plotting, history plotting
+
+Reproducibility
+
+Set seeds for NumPy / TensorFlow and use random_state in splitters/samplers.
+
+Persist the scaler fitted on the training set if you need to reuse it.
+
+Notes on Imbalance
+
+Oversampling is applied only to the training set to avoid leaking synthetic information into validation/test.
