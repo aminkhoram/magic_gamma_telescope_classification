@@ -44,7 +44,7 @@ Converts target to binary.
 
 Plots feature histograms per class.
 
-Split
+Split:
 
 Shuffles the dataset and splits into:
 
