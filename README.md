@@ -1,10 +1,11 @@
-MAGIC Gamma Classification
+MAGIC Gamma Classification:
 
-Binary classification of MAGIC Gamma Telescope events (gamma vs hadron) using multiple models: K-NN, Naive Bayes, Logistic Regression, SVM, and a small TensorFlow MLP. Includes EDA histograms, train/validation/test split, feature scaling, optional oversampling to handle class imbalance, and model evaluation with classification_report.
+Binary classification of MAGIC Gamma Telescope events (gamma vs hadron) using multiple models: K-NN, Naive Bayes, Logistic Regression, SVM, and a TensorFlow MLP. Includes EDA histograms, train/validation/test split, feature scaling, optional oversampling to handle class imbalance, and model evaluation with classification_report.
 
-Dataset
+Dataset:
 
 File: magic04.data (CSV, no header)
+https://archive.ics.uci.edu/dataset/159/magic+gamma+telescope
 
 Columns:
 
@@ -21,14 +22,19 @@ Python 3.10+ recommended
 
 Install dependencies:
 
-pip install numpy pandas matplotlib scikit-learn imbalanced-learn tensorflow
+pip install numpy 
+pip install pandas 
+pip install matplotlib 
+pip install scikit-learn 
+pip install imbalanced-learn 
+pip install tensorflow
 
 
 Optional (for notebooks):
 
 pip install jupyter
 
-Quick Start
+Quick Start:
 
 Load & preprocess
 
@@ -52,9 +58,9 @@ Scale & (optionally) oversample
 
 Standardizes features with StandardScaler.
 
-Applies RandomOverSampler on the training set (optional flag).
+Apply RandomOverSampler on the training set (It is used to balance the classes in your dataset by randomly duplicating samples from the minority class until all classes have the same number of samples).
 
-Train models
+Train models:
 
 K-NN (n_neighbors=5)
 
@@ -72,38 +78,20 @@ Prints classification_report (precision, recall, f1, support) on the test set.
 
 For the MLP, picks the configuration with lowest validation loss and evaluates it on the test set.
 
-Running
 
-If using a script (e.g., main.py), simply:
-
-python main.py
-
-
-If using a notebook, run cells top-to-bottom.
-
-Output
+Output:
 
 Per-feature histograms comparing gamma vs hadron distributions.
 
 Text reports for each classical model.
 
-Training curves (loss/accuracy) for each MLP setting.
+Training curves (loss/accuracy) for MLP setting.
 
 Final test-set report for the best MLP.
 
 Project Structure (suggested)
-.
-├── magic04.data
-├── README.md
-├── requirements.txt
-└── src/
-    ├── data.py           # load_data(), train_valid_test_split(...)
-    ├── preprocess.py     # fit_scaler(), transform(), oversample_train(...)
-    ├── models.py         # build/train classical models and MLP
-    ├── train.py          # orchestrates workflow
-    └── viz.py            # histogram plotting, history plotting
 
-Reproducibility
+Reproducibility:
 
 Set seeds for NumPy / TensorFlow and use random_state in splitters/samplers.
 
