@@ -1,6 +1,8 @@
 MAGIC Gamma Classification:
 
-Binary classification of MAGIC Gamma Telescope events (gamma vs hadron) using multiple models: K-NN, Naive Bayes, Logistic Regression, SVM, and a TensorFlow MLP. Includes EDA histograms, train/validation/test split, feature scaling, optional oversampling to handle class imbalance, and model evaluation with classification_report.
+Introduction:
+
+Binary classification of MAGIC Gamma Telescope data (gamma vs hadron) using multiple models: K-NN, Naive Bayes, Logistic Regression, SVM, and a TensorFlow MLP. Target encoding is "1"for Gamma and "0"for hardon. Includes EDA histograms, train/validation/test split, feature scaling, optional oversampling to handle class imbalance, and model evaluation with classification_report.
 
 Dataset:
 
@@ -100,3 +102,8 @@ Persist the scaler fitted on the training set if you need to reuse it.
 Notes on Imbalance
 
 Oversampling is applied only to the training set to avoid leaking synthetic information into validation/test.
+
+Conclusion:
+
+Out of the methods we used (K-NN, Naive Bayes, Logistic Regression, SVM, and a TensorFlow MLP) for the classification of magc gamma telescope data, the Multi_Layer_Perceptron had the best result, with 96% of accuracy.
+
